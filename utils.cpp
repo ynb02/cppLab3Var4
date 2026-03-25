@@ -273,33 +273,32 @@ void getChoiceBuildModuls(Station& station) {
 		wcin >> choice;
 
 		wcout << L"\n";
-
-		switch (choice) {
-		case 1:
-			if (!station.AddModule(L"Архив")) {
-				wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
-			}
-			else wcout << L"Архив успешно создан!\n";
-			break;
-		case 2:
-			if (!station.AddModule(L"Командный отсек")) {
-				wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
-			}
-			else wcout << L"Командный отсек успешно создан!\n";
-			break;
-		case 3:
-			if (!station.AddModule(L"Жилой отсек")) {
-				wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
-			}
-			else wcout << L"Жилой отсек успешно создан!\n";
-			break;
-		case 4:
-			if (!station.AddModule(L"Генераторная")) {
-				wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
-			}
-			else wcout << L"Генераторная успешно создана!\n";
-			break;
+	}
+	switch (choice) {
+	case 1:
+		if (!station.AddModule(L"Архив")) {
+			wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
 		}
+		else wcout << L"Архив успешно создан!\n";
+		break;
+	case 2:
+		if (!station.AddModule(L"Командный отсек")) {
+			wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
+		}
+		else wcout << L"Командный отсек успешно создан!\n";
+		break;
+	case 3:
+		if (!station.AddModule(L"Жилой отсек")) {
+			wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
+		}
+		else wcout << L"Жилой отсек успешно создан!\n";
+		break;
+	case 4:
+		if (!station.AddModule(L"Генераторная")) {
+			wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
+		}
+		else wcout << L"Генераторная успешно создана!\n";
+		break;
 	}
 }
 

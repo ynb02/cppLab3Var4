@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <utility>
 #include <vector>
@@ -279,9 +279,7 @@ int Station::capacity() {
 }
 bool Station::AddRobot(wstring type) {
 	if (type == L"KEEPER") {
-		if ((totalEnergy < 150) || (totalData < 200)) {
-			return 0;
-		}
+		if ((totalEnergy < 150) || (totalData < 200)) return 0;
 
 		wstring r = getRandomName(L"KEEPER");
 		robots.push_back(new Keeper(getRandomName(L"KEEPER")));
@@ -292,9 +290,7 @@ bool Station::AddRobot(wstring type) {
 		return 1;
 	}
 	else if (type == L"INTEGRATOR") {
-		if ((totalEnergy < 150) || (totalData < 200)) {
-			return 0;
-		}
+		if ((totalEnergy < 150) || (totalData < 200)) return 0;
 
 		wstring r = getRandomName(L"INTEGRATOR");
 		robots.push_back(new Integrator(getRandomName(L"INTEGRATOR")));
@@ -305,9 +301,7 @@ bool Station::AddRobot(wstring type) {
 		return 1;
 	}
 	else {
-		if ((totalEnergy < 150) || (totalData < 200)) {
-			return 0;
-		}
+		if ((totalEnergy < 150) || (totalData < 200)) return 0;
 
 		wstring r = getRandomName(L"OPTY");
 		robots.push_back(new Opty(getRandomName(L"OPTY")));
@@ -320,9 +314,7 @@ bool Station::AddRobot(wstring type) {
 }
 bool Station::AddModule(wstring type) {
 	if (type == L"Архив") {
-		if ((totalEnergy < 150) || (totalData < 200)) {
-			return 0;
-		}
+		if ((totalEnergy < 150) || (totalData < 200)) return 0;
 
 		modules.push_back(new Archive());
 
@@ -332,9 +324,7 @@ bool Station::AddModule(wstring type) {
 		return 1;
 	}
 	else if (type == L"Командный отсек") {
-		if ((totalEnergy < 150) || (totalData < 200)) {
-			return 0;
-		}
+		if ((totalEnergy < 150) || (totalData < 200)) return 0;
 
 		modules.push_back(new Center());
 
@@ -344,9 +334,7 @@ bool Station::AddModule(wstring type) {
 		return 1;
 	}
 	else if (type == L"Жилой отсек") {
-		if ((totalEnergy < 150) || (totalData < 200)) {
-			return 0;
-		}
+		if ((totalEnergy < 150) || (totalData < 200)) return 0;
 
 		modules.push_back(new Live());
 
