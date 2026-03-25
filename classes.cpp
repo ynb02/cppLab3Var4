@@ -356,9 +356,7 @@ bool Station::AddModule(wstring type) {
 		return 1;
 	}
 	else {
-		if ((totalEnergy < 150) || (totalData < 200)) {
-			return 0;
-		}
+		if ((totalEnergy < 150) || (totalData < 200)) return 0;
 
 		modules.push_back(new Generator());
 
