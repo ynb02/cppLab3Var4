@@ -76,7 +76,6 @@ int Game() {
 				system("cls");
 				printStation(station, nameStation);
 				printMoney(station);
-				printModuls(station);
 				getChoiceUpgrateModuls(station);
 				break;
 			case '6':

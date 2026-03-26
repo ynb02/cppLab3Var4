@@ -133,6 +133,9 @@ void printModuls(Station& station) {
 	wcout << L"                          [МОДУЛИ]\n";
 	int t = 1;
 	int used = station.used();
+	int capacity = station.capacity();
+	double count = ceil((double)capacity / used);
+	int numLive = 1;
 	for (auto& m : station.getModules()) {
 
 		wstring typeModule = m->getType();
@@ -144,20 +147,42 @@ void printModuls(Station& station) {
 		int energy = m->GetEnergyOutput() - m->GetEnergyInput();
 		int data = m->GetDataOutput() - m->GetDataInput();
 
-		wcout << L"[" << t << L"] " << typeModule << getSpace(15, typeModule.length()) << L" (Lvl " << m->getLevel() <<
+		wcout << L"[" << t << L"] " << typeModule << getSpace(15, (int)typeModule.length()) << L" (Lvl " << m->getLevel() <<
 			L")   : ";
 		if (typeModule == L"Жилой отсек") {
+			int capacityModule = 6 + 2 * m->getLevel();
 			wcout << L"Мест ";
-			if (used <= 8) {
-				wcout << used;
+			if ((used > 8) && (numLive < count) && (numLive != 0)) {
+				wcout << capacityModule;
+				numLive++;
+				used -= capacityModule;
 			}
+			else if (numLive == 0) wcout << L"0";
 			else {
-				wcout << L"8";
-				used -= 8;
+				wcout << used;
+				numLive = 0;
 			}
-			wcout << L"/8" << endl;
+			wcout << L"/" << capacityModule << endl;
 		}
 		else wcout << active << L" (" << energy << L"E, " << data << L"B)" << endl;
+		t++;
+	}
+}
+
+void printModulsList(Station& station, bool status) {
+	int t = 1;
+
+	for (auto& m : station.getModules()) {
+		wstring typeModule = m->getType();
+
+		wcout << t << L". " << typeModule << getSpace(16, typeModule.length()) << m->getLevel() << L" LVL ";
+
+		if (status == true) {
+			wcout << L"(" << m->getUpgradePrice().first << L" E, " << m->getUpgradePrice().second << L" D)";
+		}
+
+		wcout << L"\n";
+
 		t++;
 	}
 }
@@ -304,7 +329,7 @@ void getChoiceBuildModuls(Station& station) {
 
 void getChoiceUpgrateModuls(Station& station) {
 	wcout << L"                     [УЛУЧШЕНИЕ МОДУЛЕЙ]\n";
-	printModulsList(station);
+	printModulsList(station, 1);
 	wcout << L"Выберете желаемый модуль: ";
 
 	int choice;
@@ -316,7 +341,7 @@ void getChoiceUpgrateModuls(Station& station) {
 	while ((choice < 1 || (choice > station.getModules().size()))) {
 		wcout << L"Ошибка! Попробуйте ещё раз: \n";
 		wcout << L"                     [УЛУЧШЕНИЕ МОДУЛЕЙ]\n";
-		printModulsList(station);
+		printModulsList(station, 1);
 
 		wcin >> choice;
 
@@ -331,14 +356,5 @@ void getChoiceUpgrateModuls(Station& station) {
 	else {
 		wcout << selectedModule->getType() << L" успешно улучшен до уровня "
 			<< selectedModule->getLevel() << L"!\n";
-	}
-}
-void printModulsList(Station& station) {
-	int t = 1;
-
-	for (auto& m : station.getModules()) {
-		wstring typeModule = m->getType();
-
-		wcout << t << L". " << typeModule << L" " << m->getLevel() << L" LVL" << L"\n";
 	}
 }

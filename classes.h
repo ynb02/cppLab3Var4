@@ -24,6 +24,7 @@ public:
 	int getLevel() { return level; }
 	int upgrade(Station& station);
 	int up();
+	std::pair<int, int> getUpgradePrice();
 	bool getActive();
 	std::wstring tumb();
 };

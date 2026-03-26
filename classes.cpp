@@ -29,18 +29,25 @@ bool Module::getActive() {
     else return false;
 }
 int Module::upgrade(Station& station) {
-	if ((station.getTotalEnergy() < 50) || (station.getTotalData() < 50)) return 0;
+	if ((station.getTotalEnergy() < getUpgradePrice().first) 
+		|| (station.getTotalData() < getUpgradePrice().second)) return 0;
 	if (level >= 10) return 0;
 	else {
 		level += 1;
-		station.setTotalEnergy(50);
-		station.setTotalData(50);
+		station.setTotalEnergy(getUpgradePrice().first);
+		station.setTotalData(getUpgradePrice().second);
 		return level;
 	}
 }
 int Module::up() {
-	int up = 1 * level;
+	int up = 2 * level;
 	return up;
+}
+pair<int, int> Module::getUpgradePrice() {
+	int first = 50 + 50 * level;
+	int second = 100 + 100 * level;
+
+	return {first, second};
 }
 
 Archive::Archive() : Module() {};

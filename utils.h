@@ -19,4 +19,4 @@ void getChoiceModuls(Station& station);
 void utilsAddRobot(Station& station);
 void getChoiceBuildModuls(Station& station);
 void getChoiceUpgrateModuls(Station& station);
-void printModulsList(Station& station);
+void printModulsList(Station& station, bool status);
