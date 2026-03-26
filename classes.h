@@ -22,6 +22,8 @@ public:
 	virtual std::wstring getType() = 0;
 
 	int getLevel() { return level; }
+	int upgrade(Station& station);
+	int up();
 	bool getActive();
 	std::wstring tumb();
 };
@@ -31,7 +33,7 @@ public:
 	Archive();
 	~Archive() override;
 
-	int GetEnergyInput() override { return 0; }
+	int GetEnergyInput() override { return 0 * up(); }
 	int GetEnergyOutput() override { return 0; }
 	int GetDataInput() override { return 0; }
 	int GetDataOutput() override { return 30; }

@@ -28,6 +28,19 @@ bool Module::getActive() {
     if (isActive == true) return true;
     else return false;
 }
+int Module::upgrade(Station& station) {
+	if (level >= 10) return 0;
+	else {
+		level += 1;
+		station.setTotalEnergy(50);
+		station.setTotalData(50);
+		return level;
+	}
+}
+int Module::up() {
+	int up = 1 * level;
+	return up;
+}
 
 Archive::Archive() : Module() {};
 Archive::~Archive() {};
