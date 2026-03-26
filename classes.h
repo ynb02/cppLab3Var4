@@ -33,10 +33,10 @@ public:
 	Archive();
 	~Archive() override;
 
-	int GetEnergyInput() override { return 0 * up(); }
-	int GetEnergyOutput() override { return 0; }
+	int GetEnergyInput() override { return 0; }
+	int GetEnergyOutput() override { return 0 + up(); }
 	int GetDataInput() override { return 0; }
-	int GetDataOutput() override { return 30; }
+	int GetDataOutput() override { return 30 + up(); }
 	std::wstring getType() override { return L"Архив"; }
 };
 class Center : public Module {
@@ -45,9 +45,9 @@ public:
 	~Center() override;
 
 	int GetEnergyInput() override { return 20; }
-	int GetEnergyOutput() override { return 0; }
+	int GetEnergyOutput() override { return 0 + up(); }
 	int GetDataInput() override { return 0; }
-	int GetDataOutput() override { return 0; }
+	int GetDataOutput() override { return 0 + up(); }
 	std::wstring getType() override { return L"Командный центр"; }
 };
 class Live : public Module {
@@ -56,9 +56,9 @@ public:
 	~Live() override;
 
 	int GetEnergyInput() override { return 5; }
-	int GetEnergyOutput() override { return 0; }
+	int GetEnergyOutput() override { return 0 + up(); }
 	int GetDataInput() override { return 0; } 
-	int GetDataOutput() override { return 0; } 
+	int GetDataOutput() override { return 0 + up(); }
 	std::wstring getType() override { return L"Жилой отсек"; }
 };
 class Generator : public Module {
@@ -67,9 +67,9 @@ public:
 	~Generator() override;
 
 	int GetEnergyInput() override { return 0; }
-	int GetEnergyOutput() override { return 40; }
+	int GetEnergyOutput() override { return 40 + up(); }
 	int GetDataInput() override { return 0; }
-	int GetDataOutput() override { return 0; }
+	int GetDataOutput() override { return 0 + up(); }
 	std::wstring getType() override { return L"Генераторная"; }
 };
 
