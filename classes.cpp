@@ -29,6 +29,7 @@ bool Module::getActive() {
     else return false;
 }
 int Module::upgrade(Station& station) {
+	if ((station.getTotalEnergy() < 50) || (station.getTotalData() < 50)) return 0;
 	if (level >= 10) return 0;
 	else {
 		level += 1;

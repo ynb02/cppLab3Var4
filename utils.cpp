@@ -303,11 +303,8 @@ void getChoiceBuildModuls(Station& station) {
 }
 
 void getChoiceUpgrateModuls(Station& station) {
-	wcout << L"                      [СОЗДАНИЕ МОДУЛЕЙ]\n";
-	wcout << L"1. Архив\n";
-	wcout << L"2. Командный отсек\n";
-	wcout << L"3. Жилой отсек\n";
-	wcout << L"4. Генераторная\n";
+	wcout << L"                     [УЛУЧШЕНИЕ МОДУЛЕЙ]\n";
+	printModulsList(station);
 	wcout << L"Выберете желаемый модуль: ";
 
 	int choice;
@@ -316,43 +313,32 @@ void getChoiceUpgrateModuls(Station& station) {
 
 	wcout << L"\n";
 
-	while ((choice < 1) || (choice > 4)) {
+	while ((choice < 1 || (choice > station.getModules().size()))) {
 		wcout << L"Ошибка! Попробуйте ещё раз: \n";
 		wcout << L"                     [УЛУЧШЕНИЕ МОДУЛЕЙ]\n";
-		wcout << L"1. Архив\n";
-		wcout << L"2. Командный отсек\n";
-		wcout << L"3. Жилой отсек\n";
-		wcout << L"4. Генераторная\n";
-		wcout << L"Выберете желаемый модуль: ";
+		printModulsList(station);
 
 		wcin >> choice;
 
 		wcout << L"\n";
 	}
-	switch (choice) {
-	case 1:
-		if (!m.upgrade(Station & station)) {
-			wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
-		}
-		else wcout << L"Архив успешно создан!\n";
-		break;
-	case 2:
-		if (!station.AddModule(L"Командный отсек")) {
-			wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
-		}
-		else wcout << L"Командный отсек успешно создан!\n";
-		break;
-	case 3:
-		if (!station.AddModule(L"Жилой отсек")) {
-			wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
-		}
-		else wcout << L"Жилой отсек успешно создан!\n";
-		break;
-	case 4:
-		if (!station.AddModule(L"Генераторная")) {
-			wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
-		}
-		else wcout << L"Генераторная успешно создана!\n";
-		break;
+
+	Module* selectedModule = station.getModule(choice - 1);
+
+	if (selectedModule->upgrade(station) == 0) {
+		wcout << L"Ошибка! Кажется, у вас недостаточно средств...\n";
+	}
+	else {
+		wcout << selectedModule->getType() << L" успешно улучшен до уровня "
+			<< selectedModule->getLevel() << L"!\n";
+	}
+}
+void printModulsList(Station& station) {
+	int t = 1;
+
+	for (auto& m : station.getModules()) {
+		wstring typeModule = m->getType();
+
+		wcout << t << L". " << typeModule << L" " << m->getLevel() << L" LVL" << L"\n";
 	}
 }
