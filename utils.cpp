@@ -144,7 +144,7 @@ void printModuls(Station& station) {
 		if (m->getActive() == 1) active = L"АКТИВЕН";
 		else active = L"ОТКЛЮЧЁН";
 
-		int energy = m->GetEnergyOutput() - m->GetEnergyInput();
+		int energy = m->GetEnergyOutput() - m->GetEnergyInput(station);
 		int data = m->GetDataOutput() - m->GetDataInput();
 
 		wcout << L"[" << t << L"] " << typeModule << getSpace(15, (int)typeModule.length()) << L" (Lvl " << m->getLevel() <<

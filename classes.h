@@ -15,7 +15,7 @@ public:
 	Module();
 	virtual ~Module();
 
-	virtual int GetEnergyInput() = 0;
+	virtual int GetEnergyInput(Station& station) = 0;
 	virtual int GetEnergyOutput() = 0;
 	virtual int GetDataInput() = 0;
 	virtual int GetDataOutput() = 0;
@@ -24,6 +24,7 @@ public:
 	int getLevel() { return level; }
 	int upgrade(Station& station);
 	int up();
+	int counterOpty(Station& station);
 	std::pair<int, int> getUpgradePrice();
 	bool getActive();
 	std::wstring tumb();
@@ -34,7 +35,7 @@ public:
 	Archive();
 	~Archive() override;
 
-	int GetEnergyInput() override { return 0; }
+	int GetEnergyInput(Station& station) override;
 	int GetEnergyOutput() override { return 0 + up(); }
 	int GetDataInput() override { return 0; }
 	int GetDataOutput() override { return 30 + up(); }
@@ -45,7 +46,7 @@ public:
 	Center();
 	~Center() override;
 
-	int GetEnergyInput() override { return 20; }
+	int GetEnergyInput(Station& station) override;
 	int GetEnergyOutput() override { return 0 + up(); }
 	int GetDataInput() override { return 0; }
 	int GetDataOutput() override { return 0 + up(); }
@@ -56,7 +57,7 @@ public:
 	Live();
 	~Live() override;
 
-	int GetEnergyInput() override { return 5; }
+	int GetEnergyInput(Station& station) override;
 	int GetEnergyOutput() override { return 0 + up(); }
 	int GetDataInput() override { return 0; } 
 	int GetDataOutput() override { return 0 + up(); }
@@ -67,7 +68,7 @@ public:
 	Generator();
 	~Generator() override;
 
-	int GetEnergyInput() override { return 0; }
+	int GetEnergyInput(Station& station) override;
 	int GetEnergyOutput() override { return 40 + up(); }
 	int GetDataInput() override { return 0; }
 	int GetDataOutput() override { return 0 + up(); }

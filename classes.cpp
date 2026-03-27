@@ -43,6 +43,13 @@ int Module::up() {
 	int up = 2 * level;
 	return up;
 }
+int Module::counterOpty(Station& station) {
+	int counter = 0;
+	for (auto& r : station.getRobots()) {
+		if (r->getType() == L"OPTY") counter += 1;
+	}
+	return counter * 5;
+}
 pair<int, int> Module::getUpgradePrice() {
 	int first = 50 + 50 * level;
 	int second = 100 + 100 * level;
@@ -52,15 +59,27 @@ pair<int, int> Module::getUpgradePrice() {
 
 Archive::Archive() : Module() {};
 Archive::~Archive() {};
+int Archive::GetEnergyInput(Station& station) {
+	return 0 - 0 / 100 * counterOpty(station);
+}
 
 Center::Center() : Module() {};
 Center::~Center() {};
+int Center::GetEnergyInput(Station& station) {
+	return 20 - 20 / 100 * counterOpty(station);
+}
 
 Live::Live() : Module() {};
 Live::~Live() {};
+int Live::GetEnergyInput(Station& station) {
+	return 5 - 5 / 100 * counterOpty(station);
+}
 
 Generator::Generator() : Module() {};
 Generator::~Generator() {};
+int Generator::GetEnergyInput(Station& station) {
+	return 0 - 0 / 100 * counterOpty(station);
+}
 
 Robot::Robot(const wstring& name) {
     Name = name;
@@ -218,7 +237,7 @@ bool Station::ProcessDay() {
 	for (auto m : modules) {
 		if (!m->getActive()) continue;
 
-		totalEnergy -= m->GetEnergyInput();
+		totalEnergy -= m->GetEnergyInput(*this);
 		totalData -= m->GetDataInput();
 	}
 
