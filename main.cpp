@@ -1,50 +1,51 @@
-﻿#include <iostream>
-#include <conio.h>
-#include <windows.h>
-#include <io.h>
-#include <fcntl.h>
+#include <iostream>
 #include <ctime>
+#include <string>
 
 #include "game.h"
 
 using namespace std;
 
 int main() {
+    srand(time(nullptr));
 
-	(void)_setmode(_fileno(stdout), _O_U16TEXT);
-	(void)_setmode(_fileno(stdin), _O_U16TEXT);
-	(void)_setmode(_fileno(stderr), _O_U16TEXT);
+    while (1) {
+        cout << "          ┌────────────────────────────────────────┐\n";
+        cout << "          |          ┌──────────────────┐          |\n";
+        cout << "          |          | DIGITALIZED-GAME |          |\n";
+        cout << "          |          └──────────────────┘          |\n";
+        cout << "          |                 [МЕНЮ]                 |\n";
+        cout << "          |            [1] Начать игру             |\n";
+        cout << "          |            [0] Выход                   |\n";
+        cout << "          |                                        |\n";
+        cout << "          └────────────────────────────────────────┘\n";
 
-	srand(time(nullptr));
+        cout << "Введите команду > ";
+        cout.flush();
 
-	while (1) {
-		wcout << L"          ┌────────────────────────────────────────┐\n";
-		wcout << L"          |          ┌──────────────────┐          |\n";
-		wcout << L"          |          | DIGITALIZED-GAME |          |\n";
-		wcout << L"          |          └──────────────────┘          |\n";
-		wcout << L"          |                 [МЕНЮ]                 |\n";
-		wcout << L"          |            [1] Начать игру             |\n";
-		wcout << L"          |            [0] Выход                   |\n";
-		wcout << L"          |                                        |\n";
-		wcout << L"          └────────────────────────────────────────┘\n";
+        string input;
+        getline(cin, input);
 
-		wcout << L"Введите команду > ";
-		int choice = _getch();
-		wcout << L"\n";
+        while (input != "0" && input != "1") {
+            cout << "Неизвестная команда! Попробуйте ещё раз...\n";
+            cout << "Введите команду > ";
+            cout.flush();
+            getline(cin, input);
+        }
 
-		switch (choice) {
-		case '1':
-			if (!Game()) {
-				wcout << L"При запуске игры произошла ошибка! Возврат в меню...\n";
-				break;
-			}
-			break;
-		case '0':
-			wcout << L"Выполняется выход...";
-			return 0;
-		default:
-			break;
-		}
-	}
-	return 0;
+        switch (input[0]) {
+        case '1':
+            if (!Game()) {
+                cout << "При запуске игры произошла ошибка! Возврат в меню...\n";
+                break;
+            }
+            break;
+        case '0':
+            cout << "Выполняется выход...";
+            return 0;
+        default:
+            break;
+        }
+    }
+    return 0;
 }
